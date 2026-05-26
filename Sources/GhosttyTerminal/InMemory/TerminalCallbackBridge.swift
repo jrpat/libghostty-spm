@@ -143,6 +143,8 @@ final class TerminalCallbackBridge {
             }
 
         default:
+            (delegate as? any TerminalSurfaceUnhandledActionDelegate)?
+                .terminalDidReceiveUnhandledAction(action)
             TerminalDebugLog.log(
                 .actions,
                 "callback action=\(TerminalDebugLog.describe(action.tag))"

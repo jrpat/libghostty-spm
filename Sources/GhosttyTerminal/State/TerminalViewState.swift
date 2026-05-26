@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import GhosttyKit
 import SwiftUI
 
 @MainActor
@@ -30,6 +31,8 @@ public final class TerminalViewState: ObservableObject {
 
     @Published public var configuration: TerminalSurfaceOptions = .init()
     public var onClose: ((Bool) -> Void)?
+    public var onUnhandledAction: ((ghostty_action_s) -> Void)?
+
     @Published public internal(set) var controller: TerminalController
 
     /// Sends text to the attached surface.

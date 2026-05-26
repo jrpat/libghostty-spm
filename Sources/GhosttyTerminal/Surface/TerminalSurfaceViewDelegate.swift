@@ -145,3 +145,16 @@ public protocol TerminalSurfaceLifecycleDelegate: TerminalSurfaceViewDelegate {
     func terminalDidAttachSurface(_ surface: TerminalSurface)
     func terminalDidDetachSurface()
 }
+
+/// Notifies the host about app-level Ghostty actions that the bridge does
+/// not interpret itself — e.g. `new_split`, `new_tab`, `close_surface`,
+/// `quit`, `goto_split`, `goto_tab`, fired by libghostty when a keybind
+/// matches. Hosts that own the surrounding application structure (tabs,
+/// splits, windows) implement this to react to those actions.
+///
+/// The full C action struct is forwarded so callers can inspect the tag
+/// and payload (`action.action.new_split`, `action.action.goto_tab`, etc.).
+@MainActor
+public protocol TerminalSurfaceUnhandledActionDelegate: TerminalSurfaceViewDelegate {
+    func terminalDidReceiveUnhandledAction(_ action: ghostty_action_s)
+}

@@ -17,7 +17,8 @@ extension TerminalViewState:
     TerminalSurfaceDesktopNotificationDelegate,
     TerminalSurfacePwdDelegate,
     TerminalSurfaceCommandFinishedDelegate,
-    TerminalSurfaceLifecycleDelegate
+    TerminalSurfaceLifecycleDelegate,
+    TerminalSurfaceUnhandledActionDelegate
 {
     public func terminalDidChangeTitle(_ title: String) {
         self.title = title
@@ -61,5 +62,9 @@ extension TerminalViewState:
 
     public func terminalDidDetachSurface() {
         surface = nil
+    }
+
+    public func terminalDidReceiveUnhandledAction(_ action: ghostty_action_s) {
+        onUnhandledAction?(action)
     }
 }
