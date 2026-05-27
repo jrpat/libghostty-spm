@@ -58,6 +58,7 @@ public final class TerminalController {
     public internal(set) var lastConfigurationIssue: String?
     var onWakeup: (() -> Void)?
     var shouldProcessWakeup: (() -> Bool)?
+    var appActionHandler: ((ghostty_action_s) -> Void)?
 
     // MARK: - Config Resolution State
 
